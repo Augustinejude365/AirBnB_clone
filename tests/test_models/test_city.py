@@ -1,8 +1,10 @@
 #!/usr/bin/python3
-"""
-This line of codes defines the unittests for models/city.py
-unittest classes: TestCity_instantiation, TestCity_save,
-and TestCity_to_dict
+"""Defines unittests for models/city.py.
+
+Unittest classes:
+    TestCity_instantiation
+    TestCity_save
+    TestCity_to_dict
 """
 import os
 import models
@@ -13,12 +15,10 @@ from models.city import City
 
 
 class TestCity_instantiation(unittest.TestCase):
-    """
-    This Unittests is for testing instantiation of the City class."""
+    """Unittests for testing instantiation of the City class."""
 
-
-def test_no_args_instantiates(self):
-    self.assertEqual(City, type(City()))
+    def test_no_args_instantiates(self):
+        self.assertEqual(City, type(City()))
 
     def test_new_instance_stored_in_objects(self):
         self.assertIn(City(), models.storage.all().values())
@@ -110,16 +110,6 @@ class TestCity_save(unittest.TestCase):
         except IOError:
             pass
 
-    def tearDown(self):
-        try:
-            os.remove("file.json")
-        except IOError:
-            pass
-        try:
-            os.rename("tmp", "file.json")
-        except IOError:
-            pass
-
     def test_one_save(self):
         cy = City()
         sleep(0.05)
@@ -152,9 +142,7 @@ class TestCity_save(unittest.TestCase):
 
 
 class TestCity_to_dict(unittest.TestCase):
-    """
-    This Unittests is for testing to_dict method of the City class.
-    """
+    """Unittests for testing to_dict method of the City class."""
 
     def test_to_dict_type(self):
         self.assertTrue(dict, type(City().to_dict()))
@@ -186,10 +174,10 @@ class TestCity_to_dict(unittest.TestCase):
         cy.id = "123456"
         cy.created_at = cy.updated_at = dt
         tdict = {
-            "id": "123456",
-            "__class__": "City",
-            "created_at": dt.isoformat(),
-            "updated_at": dt.isoformat(),
+            'id': '123456',
+            '__class__': 'City',
+            'created_at': dt.isoformat(),
+            'updated_at': dt.isoformat(),
         }
         self.assertDictEqual(cy.to_dict(), tdict)
 
